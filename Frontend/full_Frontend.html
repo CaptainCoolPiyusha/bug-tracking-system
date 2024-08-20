@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bug Tracking System</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #00416a, #00bcd4);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-container {
+            display: none; /* Initially hide all forms/screens */
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            width: 350px;
+            margin: auto;
+        }
+
+        .form-container.active {
+            display: block; /* Show the active form/screen */
+        }
+
+        h1, h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #00bcd4;
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select,
+        textarea,
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background: #ffffff;
+            text-align: left;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        .btn {
+            background: #00bcd4;
+            color: #ffffff;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #0097a7;
+        }
+
+        .link {
+            color: #ffffff;
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        .dashboard {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            margin: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 250px;
+            text-align: center;
+        }
+
+        .project-card h4 {
+            color: #00bcd4;
+            margin-bottom: 10px;
+        }
+
+        .project-card p {
+            font-size: 14px;
+            color: #ffffff;
+        }
+
+        .project-card .status {
+            font-size: 12px;
+            padding: 5px;
+            border-radius: 3px;
+            color: #ffffff;
+            background-color: #00bcd4;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .actions {
+            text-align: center;
+        }
+
+        .actions .btn {
+            margin-top: 10px;
+            padding: 5px;
+            font-size: 12px;
+            background-color: #00bcd4;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .btn-back {
+            background-color: #f44336;
+            color: white;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-back:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Center the text area background */
+        .container,
+        .form-container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            width: 350px;
+        }
+
+        /* Adjust alignment for the tester page date field */
+        #tester-screen input[type="date"] {
+            text-align: left;
+        }
+
+        /* Align fields in manager and developer screens */
+        .dashboard {
+            flex-direction: column;
+        }
+
+        .project-card {
+            text-align: left;
+        }
+
+        .project-card .status {
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Landing Page -->
+<div id="landing-container" class="form-container active">
+    <h1>Bug Tracking System</h1>
+    <button onclick="switchForm('register-container')" class="btn">Register</button>
+    <button onclick="switchForm('login-container')" class="btn">Login</button>
+</div>
+
+<!-- Registration Page -->
+<div id="register-container" class="form-container">
+    <h1>Register</h1>
+    <form id="registration-form">
+        <input type="text" id="name" placeholder="Enter Name" required>
+        <select id="designation" required>
+            <option value="" disabled selected>Select Designation</option>
+            <option value="tester">Tester</option>
+            <option value="developer">Developer</option>
+            <option value="manager">Manager</option>
+        </select>
+        <input type="email" id="email" placeholder="Enter Email-Id" required>
+        <input type="text" id="employee-code" placeholder="Enter Employee Code" required>
+        <input type="password" id="password" placeholder="Enter Password" required>
+        <input type="password" id="confirm-password" placeholder="Re-Enter Password" required>
+        <button type="submit" class="btn">Register</button>
+        <a href="#" onclick="switchForm('login-container')" class="link">Have an Account? Go to Login</a>
+    </form>
+</div>
+
+<!-- Login Page -->
+<div id="login-container" class="form-container">
+    <h1>Login</h1>
+    <form id="login-form">
+        <input type="email" id="login-email" placeholder="Enter Email" required>
+        <input type="password" id="login-password" placeholder="Enter Password" required>
+        <button type="submit" class="btn">Login</button>
+        <a href="#" onclick="switchForm('register-container')" class="link">Not Have an Account? Go to Register</a>
+    </form>
+</div>
+
+<!-- Tester Screen (Bug Reporting) -->
+<div id="tester-screen" class="form-container">
+    <h2>Report a Bug</h2>
+    <form id="bug-report-form">
+        <input type="text" id="bug-name" placeholder="Your Name" required>
+        <input type="email" id="bug-email" placeholder="Your Email" required>
+        <input type="date" id="bug-date" required>
+        <select id="bug-type" required>
+            <option value="" disabled selected>Select Bug Type</option>
+            <option value="ui">UI Issue</option>
+            <option value="functional">Functional Issue</option>
+            <option value="performance">Performance Issue</option>
+        </select>
+        <select id="bug-priority" required>
+            <option value="" disabled selected>Select Priority</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+        </select>
+        <textarea id="bug-description" placeholder="Describe the issue" required></textarea>
+        <button type="submit" class="btn">Submit Bug Report</button>
+    </form>
+    <button class="btn-back" onclick="logout()">Log Out</button>
+</div>
+
+<!-- Developer Screen -->
+<div id="developer-screen" class="form-container">
+    <h2>Assigned Bugs</h2>
+    <div class="dashboard" id="developer-dashboard">
+        <!-- Bug cards will be dynamically generated here -->
+    </div>
+    <button class="btn-back" onclick="logout()">Log Out</button>
+</div>
+
+<!-- Manager Screen -->
+<div id="manager-screen" class="form-container">
+    <h2>All Bugs</h2>
+    <div class="dashboard" id="manager-dashboard">
+        <!-- Bug cards will be dynamically generated here -->
+    </div>
+    <button class="btn-back" onclick="logout()">Log Out</button>
+</div>
+
+<script>
+    let users = [];
+    let bugs = [];
+    let loggedInUser = null;
+    let developers = [];
+    let testers = [];
+
+        function switchForm(formId) {
+        // Hide all form containers
+        document.querySelectorAll('.form-container').forEach(form => {
+            form.classList.remove('active');
+        });
+
+        // Show the selected form container
+        document.getElementById(formId).classList.add('active');
+    }
+
+    function registerUser(event) {
+        event.preventDefault();
+        const name = document.getElementById('name').value;
+        const designation = document.getElementById('designation').value;
+        const email = document.getElementById('email').value;
+        const employeeCode = document.getElementById('employee-code').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+
+        if (password !== confirmPassword) {
+            alert('Passwords do not match!');
+            return;
+        }
+
+        const newUser = { name, designation, email, employeeCode, password };
+
+        if (designation === 'developer') {
+            developers.push(newUser);
+        } else if (designation === 'tester') {
+            testers.push(newUser);
+        }
+
+        users.push(newUser);
+        alert('Registration successful!');
+
+        switchForm('login-container');
+    }
+
+    function loginUser(event) {
+        event.preventDefault();
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+
+        loggedInUser = users.find(user => user.email === email && user.password === password);
+
+        if (!loggedInUser) {
+            alert('Invalid email or password!');
+            return;
+        }
+
+        switch (loggedInUser.designation) {
+            case 'tester':
+                switchForm('tester-screen');
+                break;
+            case 'developer':
+                switchForm('developer-screen');
+                loadDeveloperDashboard();
+                break;
+            case 'manager':
+                switchForm('manager-screen');
+                loadManagerDashboard();
+                break;
+            default:
+                alert('Invalid user designation!');
+        }
+    }
+
+    function loadDeveloperDashboard() {
+        const developerDashboard = document.getElementById('developer-dashboard');
+        developerDashboard.innerHTML = ''; // Clear the existing content
+
+        const assignedBugs = bugs.filter(bug => bug.assignedTo === loggedInUser.email);
+
+        assignedBugs.forEach(bug => {
+            const bugCard = document.createElement('div');
+            bugCard.classList.add('project-card');
+
+            bugCard.innerHTML = `
+                <h4>${bug.name}</h4>
+                <p>Type: ${bug.type}</p>
+                <p>Priority: ${bug.priority}</p>
+                <p>Date: ${bug.date}</p>
+                <p>Description: ${bug.description}</p>
+                <p>Status: <span class="status">${bug.status}</span></p>
+                <div class="actions">
+                    <button class="btn" onclick="updateBugStatus('${bug.id}', 'Done')">Mark as Done</button>
+                </div>
+            `;
+
+            developerDashboard.appendChild(bugCard);
+        });
+    }
+
+    function loadManagerDashboard() {
+    let dashboard = document.getElementById('manager-dashboard');
+    dashboard.innerHTML = '';
+
+    bugs.forEach(bug => {
+        let card = document.createElement('div');
+        card.classList.add('project-card');
+
+        // Filter to get only available developers
+        let availableDevelopers = developers.filter(dev => !bugs.some(b => b.assignedTo === dev.email));
+        
+        let developerDropdown = '<select id="developer-dropdown">';
+        availableDevelopers.forEach(dev => {
+            developerDropdown += `<option value="${dev.email}">${dev.name}</option>`;
+        });
+        developerDropdown += '</select>';
+
+        card.innerHTML = `
+            <h4>${bug.type}</h4>
+            <p><strong>Name:</strong> ${bug.name}</p>
+            <p><strong>Email:</strong> ${bug.email}</p>
+            <p><strong>Date:</strong> ${bug.date}</p>
+            <p><strong>Description:</strong> ${bug.description}</p>
+            <div class="status">Status: ${bug.status}</div>
+            <div class="actions">
+                ${bug.status === 'Pending' ? `
+                    ${developerDropdown}
+                    <button onclick="assignBugToDeveloper('${bug.id}')">Assign to Developer</button>
+                ` : `
+                    <button onclick="updateBugStatus('${bug.id}', 'Closed')">Close Bug</button>
+                `}
+            </div>
+        `;
+
+        dashboard.appendChild(card);
+    });
+}
+
+function assignBugToDeveloper(bugId) {
+    let selectedDeveloperEmail = document.getElementById('developer-dropdown').value;
+
+    if (selectedDeveloperEmail) {
+        let bug = bugs.find(b => b.id === bugId);
+        let developer = developers.find(dev => dev.email === selectedDeveloperEmail);
+
+        bug.assignedTo = developer.email;
+        bug.status = 'Assigned to Developer';
+
+        alert(`Bug assigned to ${developer.name} successfully!`);
+        loadManagerDashboard();
+    } else {
+        alert('No available developers!');
+    }
+}
+
+
+    function submitBugReport(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('bug-name').value;
+        const email = document.getElementById('bug-email').value;
+        const date = document.getElementById('bug-date').value;
+        const type = document.getElementById('bug-type').value;
+        const priority = document.getElementById('bug-priority').value;
+        const description = document.getElementById('bug-description').value;
+
+        const newBug = {
+            id: `bug-${Date.now()}`,
+            name,
+            email,
+            date,
+            type,
+            priority,
+            description,
+            status: 'Pending',
+            assignedTo: ''
+        };
+
+        bugs.push(newBug);
+        alert('Bug report submitted successfully!');
+    }
+
+    function updateBugStatus(bugId, status) {
+        const bug = bugs.find(bug => bug.id === bugId);
+        bug.status = status;
+        loadDeveloperDashboard();
+    }
+
+    function logout() {
+        loggedInUser = null;
+        switchForm('landing-container');
+    }
+
+    document.getElementById('registration-form').addEventListener('submit', registerUser);
+    document.getElementById('login-form').addEventListener('submit', loginUser);
+    document.getElementById('bug-report-form').addEventListener('submit', submitBugReport);
+</script>
+</body>
+</html>
