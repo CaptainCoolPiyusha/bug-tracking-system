@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bug Tracking System</title>
+    <title>model.Bug Tracking System</title>
     <style>
         body {
             margin: 0;
@@ -202,7 +202,7 @@
 
 <!-- Landing Page -->
 <div id="landing-container" class="form-container active">
-    <h1>Bug Tracking System</h1>
+    <h1>model.Bug Tracking System</h1>
     <button onclick="switchForm('register-container')" class="btn">Register</button>
     <button onclick="switchForm('login-container')" class="btn">Login</button>
 </div>
@@ -238,15 +238,15 @@
     </form>
 </div>
 
-<!-- Tester Screen (Bug Reporting) -->
+<!-- Tester Screen (model.Bug Reporting) -->
 <div id="tester-screen" class="form-container">
-    <h2>Report a Bug</h2>
+    <h2>Report a model.Bug</h2>
     <form id="bug-report-form">
         <input type="text" id="bug-name" placeholder="Your Name" required>
         <input type="email" id="bug-email" placeholder="Your Email" required>
         <input type="date" id="bug-date" required>
         <select id="bug-type" required>
-            <option value="" disabled selected>Select Bug Type</option>
+            <option value="" disabled selected>Select model.Bug Type</option>
             <option value="ui">UI Issue</option>
             <option value="functional">Functional Issue</option>
             <option value="performance">Performance Issue</option>
@@ -258,7 +258,7 @@
             <option value="high">High</option>
         </select>
         <textarea id="bug-description" placeholder="Describe the issue" required></textarea>
-        <button type="submit" class="btn">Submit Bug Report</button>
+        <button type="submit" class="btn">Submit model.Bug Report</button>
     </form>
     <button class="btn-back" onclick="logout()">Log Out</button>
 </div>
@@ -267,7 +267,7 @@
 <div id="developer-screen" class="form-container">
     <h2>Assigned Bugs</h2>
     <div class="dashboard" id="developer-dashboard">
-        <!-- Bug cards will be dynamically generated here -->
+        <!-- model.Bug cards will be dynamically generated here -->
     </div>
     <button class="btn-back" onclick="logout()">Log Out</button>
 </div>
@@ -276,7 +276,7 @@
 <div id="manager-screen" class="form-container">
     <h2>All Bugs</h2>
     <div class="dashboard" id="manager-dashboard">
-        <!-- Bug cards will be dynamically generated here -->
+        <!-- model.Bug cards will be dynamically generated here -->
     </div>
     <button class="btn-back" onclick="logout()">Log Out</button>
 </div>
@@ -410,7 +410,7 @@
                     ${developerDropdown}
                     <button onclick="assignBugToDeveloper('${bug.id}')">Assign to Developer</button>
                 ` : `
-                    <button onclick="updateBugStatus('${bug.id}', 'Closed')">Close Bug</button>
+                    <button onclick="updateBugStatus('${bug.id}', 'Closed')">Close model.Bug</button>
                 `}
             </div>
         `;
@@ -429,7 +429,7 @@ function assignBugToDeveloper(bugId) {
         bug.assignedTo = developer.email;
         bug.status = 'Assigned to Developer';
 
-        alert(`Bug assigned to ${developer.name} successfully!`);
+        alert(`model.Bug assigned to ${developer.name} successfully!`);
         loadManagerDashboard();
     } else {
         alert('No available developers!');
@@ -460,7 +460,7 @@ function assignBugToDeveloper(bugId) {
         };
 
         bugs.push(newBug);
-        alert('Bug report submitted successfully!');
+        alert('model.Bug report submitted successfully!');
     }
 
     function updateBugStatus(bugId, status) {
