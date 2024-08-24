@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        EmpService empService = new EmpService();
+        EmpService empService = EmpService.getInstance();
         try {
 
 //            Employee employee = new Employee(1, "piyusha@gmail.com", "Piyusha", "test123", "Tester");

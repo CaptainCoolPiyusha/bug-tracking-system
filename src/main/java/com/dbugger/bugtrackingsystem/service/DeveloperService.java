@@ -1,11 +1,13 @@
 package com.dbugger.bugtrackingsystem.service;
 
 import com.dbugger.bugtrackingsystem.dao.BugDAO;
+import com.dbugger.bugtrackingsystem.dao.DAOFactory;
 import com.dbugger.bugtrackingsystem.dao.DeveloperDAO;
 import com.dbugger.bugtrackingsystem.dao.ProjectDAO;
 import com.dbugger.bugtrackingsystem.entity.Bug;
 import com.dbugger.bugtrackingsystem.entity.Developer;
 import com.dbugger.bugtrackingsystem.entity.Project;
+import com.dbugger.bugtrackingsystem.factory.DAOImpl;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -17,10 +19,11 @@ public class DeveloperService {
     private final ProjectDAO projectDAO;
     private final BugDAO bugDAO;
 
-    private DeveloperService() {
-        developerDAO = new DeveloperDAO();
-        projectDAO = new ProjectDAO();
-        bugDAO = new BugDAO();
+    public DeveloperService() {
+        DAOFactory daoFactory = new DAOImpl();
+        developerDAO = daoFactory.getDeveloperDAO();
+        projectDAO = daoFactory.getProjectDAO();
+        bugDAO = daoFactory.getBugDAO();
     }
 
     public static DeveloperService getInstance() {

@@ -1,10 +1,12 @@
 package com.dbugger.bugtrackingsystem.service;
 
 import com.dbugger.bugtrackingsystem.dao.BugDAO;
+import com.dbugger.bugtrackingsystem.dao.DAOFactory;
 import com.dbugger.bugtrackingsystem.dao.ProjectDAO;
 import com.dbugger.bugtrackingsystem.entity.Bug;
 import com.dbugger.bugtrackingsystem.entity.Employee;
 import com.dbugger.bugtrackingsystem.entity.Project;
+import com.dbugger.bugtrackingsystem.factory.DAOImpl;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -15,9 +17,10 @@ public class TesterService {
     private BugDAO bugDAO;
     private ProjectDAO projectDAO;
 
-    private TesterService() {
-        bugDAO = new BugDAO();
-        projectDAO = new ProjectDAO();
+    public TesterService() {
+        DAOFactory daoFactory = new DAOImpl();
+        bugDAO = daoFactory.getBugDAO();
+        projectDAO = daoFactory.getProjectDAO();
     }
 
     public static TesterService getInstance() {
