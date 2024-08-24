@@ -46,5 +46,43 @@ public class ProjectDAO {
         return projects;
     }
 
+    public List<Project> getProjectsByDeveloperId(int developerId) throws SQLException {
+        List<Project> projects = new ArrayList<>();
+        Connection connection = DBConnection.getConnection();
+        String sql = "SELECT p.* FROM projects p JOIN project_assignments pa ON p.projectID = pa.projectID WHERE pa.developerID = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, developerId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Project project = new Project();
+            project.setProjectID(resultSet.getString("projectID"));
+            project.setProjectName(resultSet.getString("projectName"));
+            project.setStartDate(resultSet.getString("startDate"));
+            project.setStatus(resultSet.getString("status"));
+            // Set other fields as necessary
+            projects.add(project);
+        }
+        connection.close();
+        return projects;
+    }
+    public Project getProjectById(int projectId) throws SQLException {
+        Connection connection = DBConnection.getConnection();
+        String sql = "SELECT * FROM projects WHERE projectID = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, projectId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        Project project = null;
+        if (resultSet.next()) {
+            project = new Project();
+            project.setProjectID(resultSet.getString("projectID"));
+            project.setProjectName(resultSet.getString("projectName"));
+            project.setStartDate(resultSet.getString("startDate"));
+            project.setStatus(resultSet.getString("status"));
+            // Set other fields as necessary
+        }
+        connection.close();
+        return project;
+    }
+
     // Other CRUD operations
 }
