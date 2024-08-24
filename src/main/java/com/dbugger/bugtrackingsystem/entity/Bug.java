@@ -9,11 +9,13 @@ public class Bug {
     private String description;
     private String severityLevel;
     private String status;
-    private Employee createdBy;
+    private int createdBy;
     private Employee assignedTo;
     private Date createdOn;
 
-    public Bug(Employee assignedTo, String bugID, Employee createdBy, Date createdOn, String description, String severityLevel, String status, String title) {
+    public Bug() {}
+
+    public Bug(Employee assignedTo, String bugID, int createdBy, Date createdOn, String description, String severityLevel, String status, String title) {
         this.assignedTo = assignedTo;
         this.bugID = bugID;
         this.createdBy = createdBy;
@@ -40,11 +42,11 @@ public class Bug {
         this.bugID = bugID;
     }
 
-    public Employee getCreatedBy() {
+    public int getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(Employee createdBy) {
+    public void setCreatedBy(int createdBy) {
         this.createdBy = createdBy;
     }
 

@@ -1,11 +1,15 @@
 package com.dbugger.bugtrackingsystem.dao;
 
+import com.dbugger.bugtrackingsystem.entity.Bug;
 import com.dbugger.bugtrackingsystem.entity.Project;
 import com.dbugger.bugtrackingsystem.util.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProjectDAO {
 
@@ -20,6 +24,26 @@ public class ProjectDAO {
         preparedStatement.setInt(5, project.getManager().getEmpID());
         preparedStatement.executeUpdate();
         connection.close();
+    }
+
+    public List<Project> getProjectsByTesterId(int testerId) throws SQLException {
+        List<Project> projects = new ArrayList<>();
+        Connection connection = DBConnection.getConnection();
+        String sql = "SELECT p.* FROM projects p JOIN project_assignments pa ON p.projectID = pa.projectID WHERE pa.testerID = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, testerId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Project project = new Project();
+            project.setProjectID(resultSet.getString("projectID"));
+            project.setProjectName(resultSet.getString("projectName"));
+            project.setStartDate(resultSet.getString("startDate"));
+            project.setStatus(resultSet.getString("status"));
+            // Set other fields as necessary
+            projects.add(project);
+        }
+        connection.close();
+        return projects;
     }
 
     // Other CRUD operations

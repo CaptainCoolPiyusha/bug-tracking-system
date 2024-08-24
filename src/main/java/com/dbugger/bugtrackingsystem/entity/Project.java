@@ -11,6 +11,8 @@ public class Project {
     private Employee manager;
     private List<Employee> teamMembers;
 
+    public Project() {
+    }
     public Project(Employee manager, String projectID, String projectName, String startDate, String status, List<Employee> teamMembers) {
         this.manager = manager;
         this.projectID = projectID;
