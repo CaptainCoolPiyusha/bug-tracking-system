@@ -2,6 +2,7 @@ package com.dbugger.bugtrackingsystem.service.EmpServiceTest;
 
 import com.dbugger.bugtrackingsystem.dao.DAOFactory;
 import com.dbugger.bugtrackingsystem.dao.ProjectDAO;
+import com.dbugger.bugtrackingsystem.entity.Employee;
 import com.dbugger.bugtrackingsystem.entity.Project;
 import com.dbugger.bugtrackingsystem.dao.DAOImpl;
 import com.dbugger.bugtrackingsystem.service.ProjectService;
@@ -12,6 +13,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -19,6 +21,8 @@ public class ProjectServiceTest {
 
     private ProjectService projectService;
     private Connection connection;
+    private Employee emp;
+    private List<Employee> teamMembers;
 
     @Before
     public void setUp() throws SQLException {
@@ -37,7 +41,7 @@ public class ProjectServiceTest {
 
     @Test
     public void testRegisterProject() throws SQLException {
-        Project project = new Project(1, "Project Name", "Project Description");
+        Project project = new Project(emp, "ProjectID", "ProjectName", "startDate","status",teamMembers);
         projectService.createProject(project);
 
         Project result = projectService.getProjectById(1);
@@ -47,7 +51,7 @@ public class ProjectServiceTest {
 
     @Test
     public void testGetProjectById() throws SQLException {
-        Project project = new Project(1, "Project Name", "Project Description");
+        Project project = new Project(emp, "ProjectID", "ProjectName", "startDate","status",teamMembers);
         projectService.createProject(project);
 
         Project result = projectService.getProjectById(1);

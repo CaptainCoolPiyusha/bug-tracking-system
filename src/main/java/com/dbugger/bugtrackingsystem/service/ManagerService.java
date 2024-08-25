@@ -22,7 +22,7 @@ public class ManagerService {
 
     // Constructor that initializes DAOs using a factory pattern
     public ManagerService() {
-        DAOFactory daoFactory = new com.dbugger.bugtrackingsystem.dao.DAOImpl();
+        DAOFactory daoFactory = new com.dbugger.bugtrackingsystem.dao       .DAOImpl();
         bugDAO = daoFactory.getBugDAO();
         projectDAO = daoFactory.getProjectDAO();
     }

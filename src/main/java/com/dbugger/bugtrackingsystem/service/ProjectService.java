@@ -31,5 +31,9 @@ public class ProjectService {
         this.projectDAO = projectDAO;
     }
 
+    public Project getProjectById(int i) throws SQLException {
+        return projectDAO.getProjectById(i);
+    }
+
     // Other service methods
 }

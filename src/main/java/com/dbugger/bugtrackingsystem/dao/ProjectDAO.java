@@ -25,7 +25,6 @@ public class ProjectDAO {
         preparedStatement.executeUpdate();
         connection.close();
     }
-
     public List<Project> getProjectsByTesterId(int testerId) throws SQLException {
         List<Project> projects = new ArrayList<>();
         Connection connection = DBConnection.getConnection();

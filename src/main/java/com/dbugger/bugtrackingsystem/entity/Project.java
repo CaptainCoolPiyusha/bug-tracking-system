@@ -94,4 +94,8 @@ public class Project {
                 ", teamMembers=" + teamMembers +
                 '}';
     }
+
+    public String getName() {
+        return projectName;
+    }
 }
