@@ -6,7 +6,7 @@ import com.dbugger.bugtrackingsystem.dao.ProjectDAO;
 import com.dbugger.bugtrackingsystem.entity.Bug;
 import com.dbugger.bugtrackingsystem.entity.Employee;
 import com.dbugger.bugtrackingsystem.entity.Project;
-import com.dbugger.bugtrackingsystem.factory.DAOImpl;
+import com.dbugger.bugtrackingsystem.dao.DAOImpl;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -22,7 +22,7 @@ public class ManagerService {
 
     // Constructor that initializes DAOs using a factory pattern
     public ManagerService() {
-        DAOFactory daoFactory = new com.dbugger.bugtrackingsystem.factory.DAOImpl();
+        DAOFactory daoFactory = new com.dbugger.bugtrackingsystem.dao.DAOImpl();
         bugDAO = daoFactory.getBugDAO();
         projectDAO = daoFactory.getProjectDAO();
     }

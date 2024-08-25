@@ -7,7 +7,7 @@ import com.dbugger.bugtrackingsystem.dao.ProjectDAO;
 import com.dbugger.bugtrackingsystem.entity.Bug;
 import com.dbugger.bugtrackingsystem.entity.Developer;
 import com.dbugger.bugtrackingsystem.entity.Project;
-import com.dbugger.bugtrackingsystem.factory.DAOImpl;
+import com.dbugger.bugtrackingsystem.dao.DAOImpl;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
 public class DeveloperService {
 
     private static DeveloperService instance;
-    private final DeveloperDAO developerDAO;
+    private  DeveloperDAO developerDAO;
     private final ProjectDAO projectDAO;
     private final BugDAO bugDAO;
 
@@ -31,6 +31,10 @@ public class DeveloperService {
             instance = new DeveloperService();
         }
         return instance;
+    }
+
+    public void setDeveloperDAO(DeveloperDAO developerDAO) {
+        this.developerDAO = developerDAO;
     }
 
     public Developer getDeveloperById(int developerId) throws SQLException {

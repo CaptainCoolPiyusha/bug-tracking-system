@@ -3,7 +3,7 @@ package com.dbugger.bugtrackingsystem.service;
 import com.dbugger.bugtrackingsystem.dao.BugDAO;
 import com.dbugger.bugtrackingsystem.dao.DAOFactory;
 import com.dbugger.bugtrackingsystem.entity.Bug;
-import com.dbugger.bugtrackingsystem.factory.DAOImpl;
+import com.dbugger.bugtrackingsystem.dao.DAOImpl;
 
 import java.sql.SQLException;
 
